@@ -29,7 +29,10 @@ fi
 
 _info 'installing basic development tools'
 
-pacman -S which patch diffutils make git openssh
+pacman -S which patch diffutils make git openssh sed
+
+# sed -e 's/#zh_CN\.\(UTF-8\|GBK\)/zh_CN.\1/' /etc/locale.gen
+# locale-gen
 
 function _install_yay() {
   _info 'installing yay'
@@ -68,7 +71,9 @@ function _install_sdks() {
 
   pacman -S ocaml opam
   opam init && opam update
-  opam install utop
+  opam install utop dune merlin ocaml-lsp-server odoc ocamlformat ocp-indent
+  # TODO: 注意修改 vim 和 emacs 的配置以使用 merlin
+  #
 }
 
 _install_sdks
@@ -81,3 +86,17 @@ pacman -S docker
 # [boot]
 # systemd = true
 systemctl enable --now docker.service
+
+function _install_tmux() {
+  pacman -S tmux
+}
+
+_install_tmux
+
+function _setup_spacemacs() {
+  _info 'setting up Spacemacs'
+  pacman -S emacs
+  git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+}
+
+_setup_spacemacs
