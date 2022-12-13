@@ -40,21 +40,30 @@ This function should only modify configuration layer settings."
      ;; ----------------------------------------------------------------
      auto-completion
      ;; better-defaults
-     emacs-lisp
      git
      helm
-     lsp
-     markdown
      multiple-cursors
-     org
-     ;; (shell :variables
-     ;;        shell-default-height 30
-     ;;        shell-default-position 'bottom)
      ;; spell-checking
      ;; syntax-checking
      ;; version-control
-     treemacs)
+     treemacs
+     (shell :variables
+            shell-default-height 30
+            shell-default-position 'bottom)
 
+     lsp
+     (c-c++ :variables
+            c-c++-backend 'lsp-clangd
+            c-c++-lsp-enable-semantic-highlight t
+            c-c++-lsp-semantic-highlight-method 'overlay
+            c-c++-dap-adapters '(dap-gdb-lldb dap-lldb dap-cpptools)
+            c-c++-enable-organize-includes-on-save t
+            c-c++-enable-clang-format-on-save t
+            c-c++-enable-auto-newline t)
+     emacs-lisp
+     markdown
+     org
+     )
 
    ;; List of additional packages that will be installed without being wrapped
    ;; in a layer (generally the packages are installed only and should still be
@@ -546,6 +555,10 @@ This function is called immediately after `dotspacemacs/init', before layer
 configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
+  (setq configuration-layer--elpa-archives
+        '(("melpa-cn" . "http://1.15.88.122/melpa/")
+          ("org-cn"   . "http://1.15.88.122/org/")
+          ("gnu-cn"   . "http://1.15.88.122/gnu/")))
 )
 
 
@@ -579,7 +592,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(lsp-mode go-mode ace-jump-helm-line ace-link aggressive-indent auto-compile packed auto-highlight-symbol centered-cursor-mode clean-aindent-mode column-enforce-mode define-word devdocs dired-quick-sort drag-stuff dumb-jump editorconfig elisp-def elisp-slime-nav emr clang-format list-utils eval-sexp-fu evil-anzu anzu evil-args evil-cleverparens paredit evil-collection annalist evil-easymotion evil-ediff evil-escape evil-exchange evil-goggles evil-iedit-state iedit evil-indent-plus evil-lion evil-lisp-state evil-matchit evil-mc evil-nerd-commenter evil-numbers evil-surround evil-textobj-line evil-tutor evil-unimpaired evil-visual-mark-mode evil-visualstar expand-region eyebrowse fancy-battery flx-ido flycheck-elsa flycheck-package package-lint flycheck golden-ratio google-translate helm-ag helm-descbinds helm-flx flx helm-make helm-mode-manager helm-org helm-projectile helm-purpose helm-swoop helm-themes helm-xref helm helm-core help-fns+ hide-comnt highlight-indentation highlight-numbers parent-mode highlight-parentheses hl-todo compat hungry-delete indent-guide info+ inspector link-hint lorem-ipsum macrostep multi-line shut-up nameless open-junk-file org-superstar overseer f pkg-info epl paradox spinner password-generator popup popwin quickrun rainbow-delimiters request restart-emacs smartparens space-doc spaceline-all-the-icons memoize spaceline all-the-icons powerline spacemacs-purpose-popwin spacemacs-whitespace-cleanup string-edit string-inflection symbol-overlay symon term-cursor toc-org treemacs-evil treemacs-icons-dired treemacs-persp persp-mode treemacs-projectile treemacs projectile cfrs ht pfuture ace-window avy posframe s undo-tree queue uuidgen vi-tilde-fringe vim-powerline volatile-highlights window-purpose imenu-list winum dash writeroom-mode visual-fill-column ws-butler async bind-map diminish dotenv-mode evil-evilified-state font-lock+ holy-mode hybrid-mode evil goto-chg hydra lv pcre2el use-package bind-key which-key)))
+   '(ccls company-c-headers company-rtags company-ycmd cpp-auto-include dap-mode lsp-docker bui disaster flycheck-rtags flycheck-ycmd gendoxy google-c-style helm-rtags rtags ycmd request-deferred deferred markdown-preview-mode cmake-mode rust-mode plantuml-mode lsp-mode go-mode ace-jump-helm-line ace-link aggressive-indent auto-compile packed auto-highlight-symbol centered-cursor-mode clean-aindent-mode column-enforce-mode define-word devdocs dired-quick-sort drag-stuff dumb-jump editorconfig elisp-def elisp-slime-nav emr clang-format list-utils eval-sexp-fu evil-anzu anzu evil-args evil-cleverparens paredit evil-collection annalist evil-easymotion evil-ediff evil-escape evil-exchange evil-goggles evil-iedit-state iedit evil-indent-plus evil-lion evil-lisp-state evil-matchit evil-mc evil-nerd-commenter evil-numbers evil-surround evil-textobj-line evil-tutor evil-unimpaired evil-visual-mark-mode evil-visualstar expand-region eyebrowse fancy-battery flx-ido flycheck-elsa flycheck-package package-lint flycheck golden-ratio google-translate helm-ag helm-descbinds helm-flx flx helm-make helm-mode-manager helm-org helm-projectile helm-purpose helm-swoop helm-themes helm-xref helm helm-core help-fns+ hide-comnt highlight-indentation highlight-numbers parent-mode highlight-parentheses hl-todo compat hungry-delete indent-guide info+ inspector link-hint lorem-ipsum macrostep multi-line shut-up nameless open-junk-file org-superstar overseer f pkg-info epl paradox spinner password-generator popup popwin quickrun rainbow-delimiters request restart-emacs smartparens space-doc spaceline-all-the-icons memoize spaceline all-the-icons powerline spacemacs-purpose-popwin spacemacs-whitespace-cleanup string-edit string-inflection symbol-overlay symon term-cursor toc-org treemacs-evil treemacs-icons-dired treemacs-persp persp-mode treemacs-projectile treemacs projectile cfrs ht pfuture ace-window avy posframe s undo-tree queue uuidgen vi-tilde-fringe vim-powerline volatile-highlights window-purpose imenu-list winum dash writeroom-mode visual-fill-column ws-butler async bind-map diminish dotenv-mode evil-evilified-state font-lock+ holy-mode hybrid-mode evil goto-chg hydra lv pcre2el use-package bind-key which-key)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
