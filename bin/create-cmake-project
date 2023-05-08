@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -ex
+
+exe_dir=$(dirname $(realpath $0))
+EXE_ROOT="${exe_dir}" go run "${exe_dir}"/create_cmake_project.go "$@"

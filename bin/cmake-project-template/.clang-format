@@ -1,0 +1,4 @@
+BasedOnStyle: Google
+
+IndentCaseLabels: true
+IndentPPDirectives: AfterHash
