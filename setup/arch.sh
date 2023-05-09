@@ -1,33 +1,10 @@
-#!/usr/bin/env bash
-
-set +ex
-
-function _now() {
-  date '+%Y-%m-%d %T'
+function hq_setup_python() {
+  pacman -S ipython
 }
 
-function _green() {
-  text=$1
-  echo -n "\x1b[32m$text\x1b[0m"
+function hq_setup_golang() {
+  pacman -S go
 }
-
-function _red() {
-  text=$1
-  echo -n "\x1b[31m$text\x1b[0m"
-}
-
-function _info() {
-  msg=$1
-  printf "$(_now) $(_green INFO) $msg\n"
-}
-
-_project_dir=${PROJECT_DIR:=~/projects}
-
-if [[ ! -d ${_project_dir} ]]; then
-  mkdir -p ${_project_dir}
-fi
-
-_info 'installing basic development tools'
 
 pacman -S which patch diffutils make git openssh sed
 
@@ -51,7 +28,7 @@ function _setup_zsh() {
   pacman -S zsh
   sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-  git clone https://github.com/zsh-users/zsh-syntax-highlighting ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting 
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
   # TODO: register plugins
 }
 
@@ -62,11 +39,11 @@ function _install_sdks() {
 
   pacman -S clang lldb cmake
 
-  pacman -S go 
+  pacman -S go
   go env -w GO111MODULE=on
   go env -w GOPROXY=https://goproxy.cn,direct
 
-  pacman -S rustup 
+  pacman -S rustup
   rustup toolchain install nightly
 
   pacman -S ocaml opam
@@ -100,3 +77,8 @@ function _setup_spacemacs() {
 }
 
 _setup_spacemacs
+
+
+function setup_c++() {
+  pacman -S clang clang-extra-tools gtest
+}
