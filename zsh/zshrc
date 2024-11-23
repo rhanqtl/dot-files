@@ -125,10 +125,10 @@ export PATH="${PATH}":"${HOME}"/.local/share/gem/ruby/3.0.0/bin:"${HOME}"/bin
 
 function setup_proxy() {
         host_ip=$(cat /etc/resolv.conf | grep -oP '(?<=nameserver\ ).*')
-        export http_proxy="http://${host_ip}:7890"
-        export https_proxy="http://${host_ip}:7890"
-        export all_proxy="socks5://${host_ip}:7890"
-        export ALL_PROXY="socks5://${host_ip}:7890"
+        #export http_proxy="http://${host_ip}:7890"
+        #export https_proxy="http://${host_ip}:7890"
+        #export all_proxy="socks5://${host_ip}:7890"
+        #export ALL_PROXY="socks5://${host_ip}:7890"
 }
 
 function clear_proxy() {
@@ -145,8 +145,17 @@ function show_proxy() {
 	echo "ALL_PROXY   = ${ALL_PROXY}"
 }
 
-setup_proxy
+#setup_proxy
 
 export EDITOR=vim
 
+function mcd() {
+	mkdir -p "$1" && cd $_
+}
 
+if echo $- | grep -q 'l'; then
+	cd $HOME
+fi
+
+# Created by `pipx` on 2024-10-27 02:27:05
+export PATH="$PATH:/root/.local/bin"
